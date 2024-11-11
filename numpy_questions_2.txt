@@ -1,0 +1,95 @@
+// Here , we're going to do some more questions about the numpy array. 
+
+1. Find indices of elements equal to zero in a NumPy array
+2.How to Remove columns in Numpy array that contains non-numeric values?
+3.How to access different rows of a multidimensional NumPy array?
+4.Get row numbers of NumPy array having element larger than X
+5.Get filled the diagonals of NumPy array
+
+
+// Solutions //
+1. In [8]: a
+Out[8]:
+array([[8, 0, 0],
+       [0, 7, 6],
+       [0, 0, 0],
+       [7, 0, 0]], dtype=int64)
+
+In [9]: np.where(a==0)
+Out[9]:
+(array([0, 0, 1, 2, 2, 2, 3, 3], dtype=int64),
+ array([1, 2, 0, 0, 1, 2, 1, 2], dtype=int64))
+
+
+2. 
+
+// Here , we are using the .any because it is the compatible with the axises , so by Boolean logic and and unary operator we able to get the questions.
+
+In [109]: x
+Out[109]:
+array([[ 6., 10.,  6., nan],
+       [ 8., nan,  5.,  2.],
+       [nan,  7.,  8.,  4.]])
+
+In [110]: col_nan = np.any(np.isnan(x),axis = 0)
+
+In [111]: col_nan
+Out[111]: array([ True,  True, False,  True])
+
+In [112]: x[:,~col_nan]
+Out[112]:
+array([[6.],
+       [5.],
+       [8.]])
+
+
+4. 
+
+Here , we consider x = 6; 
+In [119]: a
+Out[119]:
+array([[6, 4, 7],
+       [8, 4, 6],
+       [6, 2, 3],
+       [2, 3, 8]], dtype=int64)
+
+In [120]: a[a>6]
+Out[120]: array([7, 8, 8], dtype=int64)
+
+In [121]: np.where(a>6)[0]
+Out[121]: array([0, 1, 3], dtype=int64)
+
+
+5. 
+
+Fill the diagonal elements with the nan values. 
+
+In [183]: a = a/1.0
+
+In [184]: np.fill_diagonal(a,np.nan)
+
+In [185]: a
+Out[185]:
+array([[nan,  2.,  3.],
+       [ 4., nan,  6.],
+       [ 7.,  8., nan]])
+
+
+3. 
+
+Accessing different rows. 
+
+
+Accessing the rows from 1,3 but always remember as like 1-D array please consider the last-index as the (n+1).
+In [253]: x
+Out[253]:
+array([[ 1.,  2.,  3.],
+       [ 4.,  5.,  6.],
+       [ 7.,  8.,  9.],
+       [10., 11., 12.]])
+
+In [254]: x[1:4,:]
+Out[254]:
+array([[ 4.,  5.,  6.],
+       [ 7.,  8.,  9.],
+       [10., 11., 12.]])

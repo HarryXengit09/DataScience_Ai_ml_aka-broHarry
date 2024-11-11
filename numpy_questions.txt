@@ -1,0 +1,151 @@
+// Here, I am going to do some questions on the numpy array . 
+
+
+// Questions // 
+
+Replace NumPy array elements that doesn’t satisfy the given condition
+Return the indices of elements where the given condition is satisfied
+Replace NaN values with average of columns
+Replace negative value with zero in numpy array
+How to get values of an NumPy array at certain index positions?
+
+// Solutions //
+
+1. Here, for the first qs what we do is x<5 it satisfies an condition so, we make an array
+   which satisfies it. 
+
+In [10]: x
+Out[10]:
+array([[ 1,  5,  8,  4],
+       [ 2,  4,  7,  9],
+       [ 4,  1,  5, 10]], dtype=int64)
+
+In [11]: x[x<5]
+Out[11]: array([1, 4, 2, 4, 4, 1], dtype=int64)
+
+
+2. Here, we have to return the indices where the given condition is satisfied. 
+
+
+In [30]: x
+Out[30]:
+array([[9, 8, 7],
+       [6, 5, 4],
+       [3, 2, 1]])
+
+In [31]: index = np.where(x<5)
+
+In [32]: x[index]snp 
+Out[32]: array([4, 3, 2, 1])
+
+In [33]: index
+Out[33]: (array([1, 2, 2, 2], dtype=int64), array([2, 0, 1, 2], dtype=int64))
+
+
+3.  Nice question ....
+
+
+
+Here, we are using an numpy attribute function which is .nanmean() means the value 
+   with the nan numbers. 
+
+   Here, we are also using the numpy attribute .take() it is very useful with the 
+   multi-dimensional arr , when you wants to extract the elements out of the array ...
+	
+	take(arr_name, [rows/cols] , axis)....
+
+
+In [98]: x
+Out[98]:
+array([[9. , 8. , 7. ],
+       [nan, nan, 7. ],
+       [7.5, nan, 7. ]])
+
+In [99]: col_mean = np.nanmean(x)
+
+In [100]: col_mean
+Out[100]: 7.583333333333333
+
+In [101]: col_mean = np.nanmean(x,axis=0)
+
+In [102]: col_mean
+Out[102]: array([8.25, 8.  , 7.  ])
+
+In [103]: ind = np.where(np.isnan(x))
+
+In [104]: ind
+Out[104]: (array([1, 1, 2], dtype=int64), array([0, 1, 1], dtype=int64))
+
+In [105]: x
+Out[105]:
+array([[9. , 8. , 7. ],
+       [nan, nan, 7. ],
+       [7.5, nan, 7. ]])
+
+In [106]: nan_ele_rep = np.take(col_mean,ind[1])
+
+In [107]: nan_ele_rep
+Out[107]: array([8.25, 8.  , 8.  ])
+
+In [108]: nan_ele_rep = np.take(col_mean,ind[0])
+
+In [109]: nan_ele_rep
+Out[109]: array([8., 8., 7.])
+
+In [110]: nan_ele_rep = np.take(col_mean,ind[0])
+
+In [111]: x[ind ] = nan_ele_rep
+
+In [112]: x
+Out[112]:
+array([[9. , 8. , 7. ],
+       [8. , 8. , 7. ],
+       [7.5, 7. , 7. ]]) 
+
+
+Important numpy func()
+
+
+1. .take(arr,index) -> This function is used to take the ele from the array and then with the specific index provided. 
+
+
+2. .where(cond) -> Based on the cond provided helps to figuring out the indexes of the elements. 
+
+3. .nanmean(arr, axis) -> Used to calculate the mean if nan-values are provided.  
+
+4. .isnan(arr) -> Return an Boolean logic determines that an value is present or not. 
+		Returns true if it's present. 
+
+
+
+// Solution 4 //
+
+
+
+In [64]: n
+Out[64]:
+array([[11., 10.,  9.,  8.],
+       [-7.,  6.,  5.,  6.],
+       [-7., -7., -7., -7.]])
+
+In [65]: n[ind]*(-1)
+Out[65]: array([7., 7., 7., 7., 7.])
+
+In [66]: n
+Out[66]:
+array([[11., 10.,  9.,  8.],
+       [-7.,  6.,  5.,  6.],
+       [-7., -7., -7., -7.]])
+
+In [67]: neg_ind = np.where(n<0)
+
+In [68]: neg_ind
+Out[68]: (array([1, 2, 2, 2, 2], dtype=int64), array([0, 0, 1, 2, 3], dtype=int64))
+
+In [69]: n[neg_ind] = 0
+
+In [70]: n
+Out[70]:
+array([[11., 10.,  9.,  8.],
+       [ 0.,  6.,  5.,  6.],
+       [ 0.,  0.,  0.,  0.]])

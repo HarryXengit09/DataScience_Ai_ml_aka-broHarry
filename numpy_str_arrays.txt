@@ -1,0 +1,356 @@
+// Here , we're going to know about the structured array and we're going to explore them in detail. 
+
+
+we can define our datatype in multiple ways , see how we going to do that , and make an structured array out of it. 
+
+
+
+In [1]: x = np.zeros(6)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[1], line 1
+----> 1 x = np.zeros(6)
+
+NameError: name 'np' is not defined
+
+In [2]: import numpy as np
+
+In [3]: x = np.zeros(6)
+
+In [4]: x
+Out[4]: array([0., 0., 0., 0., 0., 0.])
+
+In [5]: np.float32
+Out[5]: numpy.float32
+
+In [6]: np.U10
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Cell In[6], line 1
+----> 1 np.U10
+
+File ~\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\__init__.py:322, in __getattr__(attr)
+    319     "Removed in NumPy 1.25.0"
+    320     raise RuntimeError("Tester was removed in NumPy 1.25.")
+--> 322 raise AttributeError("module {!r} has no attribute "
+    323                      "{!r}".format(__name__, attr))
+
+AttributeError: module 'numpy' has no attribute 'U10'
+
+In [7]: np.str_
+Out[7]: numpy.str_
+
+In [8]: np.str_,10
+Out[8]: (numpy.str_, 10)
+
+In [9]: np.str_,20
+Out[9]: (numpy.str_, 20)
+
+In [10]: dtype = np.dtype([('name','U10'),('age','i4'),('float','f8')])
+
+In [11]: dtype
+Out[11]: dtype([('name', '<U10'), ('age', '<i4'), ('float', '<f8')])
+
+In [12]: name = ['Hirak','Lisha','Harry']
+
+In [13]: age = [21,20,20]
+
+In [14]: dtype = np.dtype([('name','U10'),('age','i4'),('weight','f8')])
+
+In [15]: weight = [68.8,52.12,69.0]
+
+In [16]: str_arr = np.zeros(4,dtype)
+
+In [17]: str_arr
+Out[17]:
+array([('', 0, 0.), ('', 0, 0.), ('', 0, 0.), ('', 0, 0.)],
+      dtype=[('name', '<U10'), ('age', '<i4'), ('weight', '<f8')])
+
+In [18]: str_arr[name]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[18], line 1
+----> 1 str_arr[name]
+
+KeyError: 'Hirak'
+
+In [19]: str_arr = np.zeros(3,dtype)
+
+In [20]: str_arr[name]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[20], line 1
+----> 1 str_arr[name]
+
+KeyError: 'Hirak'
+
+In [21]: dtype
+Out[21]: dtype([('name', '<U10'), ('age', '<i4'), ('weight', '<f8')])
+
+In [22]: data
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[22], line 1
+----> 1 data
+
+NameError: name 'data' is not defined
+
+In [23]: str_arr
+Out[23]:
+array([('', 0, 0.), ('', 0, 0.), ('', 0, 0.)],
+      dtype=[('name', '<U10'), ('age', '<i4'), ('weight', '<f8')])
+
+In [24]: str_arr['name']= name
+
+In [25]: str_arr['age']= age
+
+In [26]: str_arr['weight']= weight
+
+In [27]: str_arr[name]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[27], line 1
+----> 1 str_arr[name]
+
+KeyError: 'Hirak'
+
+In [28]: str_arr['name']
+Out[28]: array(['Hirak', 'Lisha', 'Harry'], dtype='<U10')
+
+In [29]: str_arr
+Out[29]:
+array([('Hirak', 21, 68.8 ), ('Lisha', 20, 52.12), ('Harry', 20, 69.  )],
+      dtype=[('name', '<U10'), ('age', '<i4'), ('weight', '<f8')])
+
+In [30]: str_arr['age']
+Out[30]: array([21, 20, 20])
+
+In [31]: str_arr['weight']
+Out[31]: array([68.8 , 52.12, 69.  ])
+
+In [32]: dtype = np.dtype([('name',(np.str_,10)),('age',np.int32),('weight',np.int64)])
+
+In [33]: dtype
+Out[33]: dtype([('name', '<U10'), ('age', '<i4'), ('weight', '<i8')])
+
+In [34]: dtype[0]
+Out[34]: dtype('<U10')
+
+In [35]: str_arr
+Out[35]:
+array([('Hirak', 21, 68.8 ), ('Lisha', 20, 52.12), ('Harry', 20, 69.  )],
+      dtype=[('name', '<U10'), ('age', '<i4'), ('weight', '<f8')])
+
+In [36]: str_arr[1]
+Out[36]: ('Lisha', 20, 52.12)
+
+In [37]: str_arr[3]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Cell In[37], line 1
+----> 1 str_arr[3]
+
+IndexError: index 3 is out of bounds for axis 0 with size 3
+
+In [38]: comp = np.dtype([('id','i8') , ('mat','f8' , (3,3))])
+
+In [39]: a = np.zeros(1,dtype = comp)
+
+In [40]: a
+Out[40]:
+array([(0, [[0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])],
+      dtype=[('id', '<i8'), ('mat', '<f8', (3, 3))])
+
+In [41]: a[0]
+Out[41]: (0, [[0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])
+
+In [42]: a['mat'][0]
+Out[42]:
+array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]])
+
+In [43]: a['mat']
+Out[43]:
+array([[[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]]])
+
+In [44]: a['mat'][1]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Cell In[44], line 1
+----> 1 a['mat'][1]
+
+IndexError: index 1 is out of bounds for axis 0 with size 1
+
+In [45]: a['mat'][0]
+Out[45]:
+array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]])
+
+In [46]: import numpy as np
+    ...:
+    ...: # Define a structured data type
+    ...: dt = np.dtype([('name', 'S10'), ('age', 'i4')])
+    ...:
+    ...: # Create a structured array using that data type
+    ...: data = np.array([('Alice', 30), ('Bob', 25)], dtype=dt)
+    ...:
+    ...: # Access the id of the dtype
+    ...: print(dt.id)  #
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Cell In[46], line 10
+      7 data = np.array([('Alice', 30), ('Bob', 25)], dtype=dt)
+      9 # Access the id of the dtype
+---> 10 print(dt.id)  #
+
+AttributeError: 'numpy.dtypes.VoidDType' object has no attribute 'id'
+
+In [47]: my_dtype = np.dtype([('name',(np.str_,10)),('author','S10'),('pric
+    ...: e','i4')])
+
+In [48]: np.empty
+Out[48]: <function numpy.empty>
+
+In [49]: np.empty()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[49], line 1
+----> 1 np.empty()
+
+TypeError: empty() missing required argument 'shape' (pos 0)
+
+In [50]: np.empty(4)
+Out[50]: array([0., 0., 0., 0.])
+
+In [51]: a = np.empty(4,my_dtype)
+
+In [52]: a
+Out[52]:
+array([('', b'', 0), ('', b'', 0), ('', b'', 0), ('', b'', 0)],
+      dtype=[('name', '<U10'), ('author', 'S10'), ('price', '<i4')])
+
+In [53]: books = ['DeepWork', ]
+
+In [54]: books = ['DeepWork', 'RichDadPoorDad','Ikagai']
+
+In [55]: books = ['NewPort', 'Kiyosaki','Hirak']
+
+In [56]: price = [122,264,312,243]
+
+In [57]: a['name'] = books
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[57], line 1
+----> 1 a['name'] = books
+
+ValueError: could not broadcast input array from shape (3,) into shape (4,)
+
+In [58]: a = np.empty(3,my_dtype)
+
+In [59]: a['name'] = books
+
+In [60]: a['author'] = author
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[60], line 1
+----> 1 a['author'] = author
+
+NameError: name 'author' is not defined
+
+In [61]: books = ['DeepWork', 'RichDadPoorDad','Ikagai']
+
+In [62]: author = ['NewPort', 'Kiyosaki','Hirak']
+
+In [63]: a['author'] = author
+
+In [64]: a['price'] = price
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[64], line 1
+----> 1 a['price'] = price
+
+ValueError: could not broadcast input array from shape (4,) into shape (3,)
+
+In [65]: price = [122,264,312]
+
+In [66]: a['price'] = price
+
+In [67]: a
+Out[67]:
+array([('NewPort', b'NewPort', 122), ('Kiyosaki', b'Kiyosaki', 264),
+       ('Hirak', b'Hirak', 312)],
+      dtype=[('name', '<U10'), ('author', 'S10'), ('price', '<i4')])
+
+In [68]: a[0]
+Out[68]: ('NewPort', b'NewPort', 122)
+
+In [69]: books
+Out[69]: ['DeepWork', 'RichDadPoorDad', 'Ikagai']
+
+In [70]: a['name']= books
+
+In [71]: a
+Out[71]:
+array([('DeepWork', b'NewPort', 122), ('RichDadPoo', b'Kiyosaki', 264),
+       ('Ikagai', b'Hirak', 312)],
+      dtype=[('name', '<U10'), ('author', 'S10'), ('price', '<i4')])
+
+In [72]: a[0]
+Out[72]: ('DeepWork', b'NewPort', 122)
+
+
+
+
+// Ways to define datatypes in different formats broo!!!..........
+
+
+
+Complex way to define it 
+
+In [76]: my_type = {'data_name': ('games','corp','price'),'formats':('U10',
+    ...: (np.str_,20), np.int64)}
+
+General way
+In [95]: np.dtype([('name',(np.str_,20)),('corp','U10'),('price','i8')])
+Out[95]: dtype([('name', '<U20'), ('corp', '<U10'), ('price', '<i8')])
+
+
+// Direct way 
+
+In [96]: np.dtype('S10,U10,i4')
+Out[96]: dtype([('f0', 'S10'), ('f1', '<U10'), ('f2', '<i4')])
+
+
+// See , here we're going to access the str_arr as keys . 
+
+
+In [98]: a['name']
+Out[98]: array(['DeepWork', 'RichDadPoo', 'Ikagai'], dtype='<U10')
+
+In [99]: a['price']
+Out[99]: array([122, 264, 312])
+
+
+// But if we instead record the arrays we can access them as the attributes. 
+// So , we use view() and np.recarray to record our data and we can access those fields as our records. 
+
+// Here, we record the arrays and use the field as attributes. 
+
+In [100]: rec_data = a.view(np.recarray)
+
+In [101]: rec_data.name
+Out[101]: array(['DeepWork', 'RichDadPoo', 'Ikagai'], dtype='<U10')
+
+In [102]: rec_data.price
+Out[102]: array([122, 264, 312])
+
+In [103]: rec_data.author
+Out[103]: array([b'NewPort', b'Kiyosaki', b'Hirak'], dtype='|S10')
+
+
+
+

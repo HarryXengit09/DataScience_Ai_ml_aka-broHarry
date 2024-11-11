@@ -1,0 +1,68 @@
+// Here, we're going to perform some of the fundamental operations in c lang. 
+
+We can perform so many operations in the numpy arr, both with the help of 
+binary or unary operations . 
+
+
+In [18]: x = np.linspace(1,20,6)
+
+In [19]: x
+Out[19]: array([ 1. ,  4.8,  8.6, 12.4, 16.2, 20. ])
+
+In [20]: x.reshape(3,2)
+Out[20]:
+array([[ 1. ,  4.8],
+       [ 8.6, 12.4],
+       [16.2, 20. ]])
+
+In [21]: x = x.reshape(2,3)
+
+In [22]: x
+Out[22]:
+array([[ 1. ,  4.8,  8.6],
+       [12.4, 16.2, 20. ]])
+
+In [23]: np.log2(x)
+Out[23]:
+array([[0.        , 2.26303441, 3.10433666],
+       [3.63226822, 4.01792191, 4.32192809]])
+
+In [24]: np.log10(x)
+Out[24]:
+array([[0.        , 0.68124124, 0.93449845],
+       [1.09342169, 1.20951501, 1.30103   ]])
+
+In [25]: np.exp(x)
+Out[25]:
+array([[2.71828183e+00, 1.21510418e+02, 5.43165959e+03],
+       [2.42801617e+05, 1.08535199e+07, 4.85165195e+08]])
+
+In [26]: np.exp2(x)
+Out[26]:
+array([[2.00000000e+00, 2.78576180e+01, 3.88023441e+02],
+       [5.40470440e+03, 7.52810954e+04, 1.04857600e+06]])
+
+In [27]: np.power(x,3)
+Out[27]:
+array([[1.000000e+00, 1.105920e+02, 6.360560e+02],
+       [1.906624e+03, 4.251528e+03, 8.000000e+03]])
+
+In [28]: np.arcsin(12)
+<ipython-input-28-c4576518447f>:1: RuntimeWarning: invalid value encountered in arcsin
+  np.arcsin(12)
+Out[28]: nan
+
+In [29]: np.arcsin(x)
+<ipython-input-29-a6357a09db4c>:1: RuntimeWarning: invalid value encountered in arcsin
+  np.arcsin(x)
+Out[29]:
+array([[1.57079633,        nan,        nan],
+       [       nan,        nan,        nan]])
+
+In [30]: np.sin(12)
+Out[30]: -0.5365729180004349
+
+In [31]: np.sin(x)
+Out[31]:
+array([[ 0.84147098, -0.99616461,  0.7343971 ],
+       [-0.16560418, -0.47242199,  0.91294525]])

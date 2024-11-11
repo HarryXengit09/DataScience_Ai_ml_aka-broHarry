@@ -1,0 +1,174 @@
+numpy_ques_3
+
+// Here , we're going to solve questions on sorting the array. 
+
+
+1.How to get the indices of the sorted array using NumPy in Python?
+
+2.Finding the k smallest values of a NumPy array
+
+3.How to get the n-largest values of an array using NumPy?
+
+4.Sort the values in a matrix
+
+5.Filter out integers from float numpy array
+
+6.Find the indices into a sorted array
+
+
+
+// Solution 1 //
+
+.argsort() -> This method is used to return the indices of the original array which gets sorted , default axis = -1 . Here for the 2-d array we mentioned it. 
+
+In [16]: sort_ind_col
+Out[16]:
+array([[2, 1, 0],
+       [0, 2, 1],
+       [1, 0, 2]], dtype=int64)
+
+In [17]: sort_ind_row = np.argsort(x,axis = 0)
+
+In [18]: sort_ind_row
+Out[18]:
+array([[1, 2, 0],
+       [2, 0, 2],
+       [0, 1, 1]], dtype=int64)
+
+
+In [19]: sort_ind_row = np.argsort(x,axis = -2)
+
+
+In [21]: sort_ind_row
+Out[21]:
+array([[1, 2, 0],
+       [2, 0, 2],
+       [0, 1, 1]], dtype=int64)
+
+
+
+// Solution 2 //
+
+
+We solve for 2d arr, and here , we're using the axis = 1 and k = 2 and 3 while accessing all the rows. 
+
+In [43]: x
+Out[43]:
+array([[11,  7,  5],
+       [ 7, 10,  9],
+       [ 7,  6,  7]], dtype=int64)
+
+In [44]: sorted_arr_axis1 = np.sort(x,axis=1)
+
+In [45]: sorted_arr_axis1
+Out[45]:
+array([[ 5,  7, 11],
+       [ 7,  9, 10],
+       [ 6,  7,  7]], dtype=int64)
+
+In [46]: sorted_arr_axis1[:,:3]
+Out[46]:
+array([[ 5,  7, 11],
+       [ 7,  9, 10],
+       [ 6,  7,  7]], dtype=int64)
+
+In [47]: sorted_arr_axis1[:,:2]
+Out[47]:
+array([[5, 7],
+       [7, 9],
+       [6, 7]], dtype=int64)
+
+
+// Solution 3 //
+
+
+
+In [52]: arr1d
+Out[52]: array([[ 7,  6,  8,  9,  2, 13,  6,  9,  5]], dtype=int64)
+
+In [53]: sort_arr1d = np.sort(arr1d)
+
+In [54]: largest_val = sort_arr1d[-1]
+
+In [55]: largest_val
+Out[55]: array([ 2,  5,  6,  6,  7,  8,  9,  9, 13], dtype=int64)
+
+In [56]: largest_val = sort_arr1d[2]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Cell In[56], line 1
+----> 1 largest_val = sort_arr1d[2]
+
+IndexError: index 2 is out of bounds for axis 0 with size 1
+
+In [57]: sort_arr1d = np.sort(arr1d)
+
+In [58]: sort_arr1d = list(sort_arr1d)
+
+In [59]: largest_val = sort_arr1d[-1]
+
+In [60]: larges_val
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[60], line 1
+----> 1 larges_val
+
+NameError: name 'larges_val' is not defined
+
+In [61]: largest_val
+Out[61]: array([ 2,  5,  6,  6,  7,  8,  9,  9, 13], dtype=int64)
+
+In [62]: sort_arr1d
+Out[62]: [array([ 2,  5,  6,  6,  7,  8,  9,  9, 13], dtype=int64)]
+
+In [63]: sort_arr1d = list(sort_arr1d[0])
+
+In [64]: largest_val = sort_arr1d[-1]
+
+In [65]: largest_val
+Out[65]: 13
+
+
+// Solution 4 //
+
+In [67]: arr1d
+Out[67]: array([[ 7,  6,  8,  9,  2, 13,  6,  9,  5]], dtype=int64)
+
+In [68]: matrix = np.matrix('[4,12,2,3;,8,3,1,6;1,2,12,3]')
+
+In [69]: matrix.sort(matrix)
+
+
+In [70]: np.sort(matrix)
+Out[70]:
+matrix([[ 2,  3,  4, 12],
+        [ 1,  3,  6,  8],
+        [ 1,  2,  3, 12]])
+
+
+// Solution 5// 
+In [71]: n_arr = np.array([1.0,2.1,2.0,4.6,3.9])
+
+In [72]: n_arr[n_arr == n_arr.astype(int)]
+Out[72]: array([1., 2.])
+
+In [73]: n_arr[n_arr != n_arr.astype(int)]
+Out[73]: array([2.1, 4.6, 3.9])
+
+
+
+// Solution 6 //
+ 
+Here, we finding the index of the arr after it gets sorted for the value which if it's desired to be inserted into the arr , so in which postion it gets inserted. 
+
+In [95]: sort_arr1d
+Out[95]: [2, 2, 3, 5, 6, 9, 12, 12, 13]
+
+In [96]: arr1d
+Out[96]: array([[ 5,  3, 12, 12,  9,  6,  2,  2, 13]], dtype=int64)
+
+In [97]: sort_arr1d
+Out[97]: [2, 2, 3, 5, 6, 9, 12, 12, 13]
+
+In [98]: np.searchsorted(sort_arr1d,5)
+Out[98]: 3

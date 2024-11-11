@@ -1,0 +1,139 @@
+pandas more questions on rows.
+
+
+Create a pandas column using for loop 
+How to get column names in Pandas dataframe 
+How to rename columns in Pandas DataFrame 
+Collapse multiple Columns in Pandas 
+Get unique values from a column in Pandas DataFrame 
+Conditional operation on Pandas DataFrame columns 
+
+
+
+// Solution 1 //
+
+In [59]: lst = []
+
+In [60]: for i in df['Ages']:
+    ...:     if i<=20:
+    ...:         lst.append('Teen')
+    ...:     elif i>20 and i<30:
+    ...:         lst.append('Adult')
+    ...:     elif i>30 :
+    ...:         lst.append('Matured Adult')
+    ...:
+
+In [61]: lst
+Out[61]: ['Teen', 'Teen', 'Teen', 'Adult', 'Matured Adult']
+
+In [62]: age
+Out[62]: [20, 19, 19, 21, 34]
+
+In [63]: df
+Out[63]:
+    Names  Ages
+0   Harry    20
+1  Keshav    19
+2  Aditya    19
+3   Gauri    21
+4  Kamina    34
+
+In [64]: df['Maturity_col'] = lst
+
+In [65]: df
+Out[65]:
+    Names  Ages   Maturity_col
+0   Harry    20           Teen
+1  Keshav    19           Teen
+2  Aditya    19           Teen
+3   Gauri    21          Adult
+4  Kamina    34  Matured Adult
+
+
+
+
+// Solution 2 //  
+
+In [20]: df.columns
+Out[20]: Index(['Names', 'Age', 'hobbies'], dtype='object')
+
+// Solution 3 // 
+
+
+In [19]: df
+Out[19]:
+   Names  Age hobbies
+C  Kamni   19     Dev
+A  Harry   20     Web
+B  Lisha   30      DS
+
+In [20]: df.columns
+Out[20]: Index(['Names', 'Age', 'hobbies'], dtype='object')
+
+In [21]: new_column = ['Names','Age','Hobbies']
+
+In [22]: df.columns = new_column
+
+In [23]: df
+Out[23]:
+   Names  Age Hobbies
+C  Kamni   19     Dev
+A  Harry   20     Web
+B  Lisha   30      DS
+
+
+// Solution 4 // 
+
+
+In [24]: df.iloc[:,:2]
+Out[24]:
+   Names  Age
+C  Kamni   19
+A  Harry   20
+B  Lisha   30
+
+
+// Solution 5 // 
+
+In [28]: df[df['Age']<=20]
+Out[28]:
+   Names  Age Hobbies
+C  Kamni   19     Dev
+A  Harry   20     Web
+
+In [29]: df[df[df['Age']<=20]]'Age']
+  Cell In[29], line 1
+    df[df[df['Age']<=20]]'Age']
+                              ^
+SyntaxError: unmatched ']'
+
+
+In [30]: new_df = df[df['Age']<=20]
+
+In [31]: new_df['Age']
+Out[31]:
+C    19
+A    20
+Name: Age, dtype: int64
+
+In [32]: df[df['Age']<=20]['Age']
+Out[32]:
+C    19
+A    20
+Name: Age, dtype: int64
+
+In [33]: df[df['Age']<=20]
+Out[33]:
+   Names  Age Hobbies
+C  Kamni   19     Dev
+A  Harry   20     Web
+
+In [34]: df[df['Age']<=20]['Age']
+Out[34]:
+C    19
+A    20
+Name: Age, dtype: int64
+
+
+
+
